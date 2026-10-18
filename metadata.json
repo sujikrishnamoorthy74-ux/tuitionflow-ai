@@ -1,0 +1,6 @@
+{
+  "name": "TuitionFlow AI — Smart Homework Portal",
+  "description": "Smart, bilingual (Tamil & English) tuition homework portal with student management, homework assignments, student submission portal, feedback, and reminders.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

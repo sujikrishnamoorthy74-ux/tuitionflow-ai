@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Students collection: accessible for roster lookup and teacher management
+    match /students/{studentId} {
+      allow read: if isValidId(studentId);
+      allow write: if isValidId(studentId);
+    }
+
+    // Homework collection: created by teacher, read by assigned students
+    match /homeworks/{homeworkId} {
+      allow read: if isValidId(homeworkId);
+      allow write: if isValidId(homeworkId);
+    }
+
+    // Submissions: submitted by students, graded and reviewed by teacher
+    match /submissions/{submissionId} {
+      allow read: if isValidId(submissionId);
+      allow write: if isValidId(submissionId);
+    }
+  }
+}

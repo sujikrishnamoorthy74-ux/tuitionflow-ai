@@ -1,0 +1,138 @@
+{
+  "entities": {
+    "student": {
+      "title": "student",
+      "description": "Student enrolled in the tuition center",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the student"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the student in English or Tamil"
+        },
+        "studentCode": {
+          "type": "string",
+          "description": "Access code for student portal"
+        },
+        "grade": {
+          "type": "string",
+          "description": "Class or standard of the student"
+        },
+        "parentPhone": {
+          "type": "string",
+          "description": "Parent phone number for WhatsApp or SMS"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation"
+        }
+      },
+      "required": ["id", "name", "studentCode", "grade"]
+    },
+    "homework": {
+      "title": "homework",
+      "description": "Homework assignment created by the teacher",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the homework"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the homework"
+        },
+        "subject": {
+          "type": "string",
+          "description": "Subject name like Tamil, English, Maths, Science, Social Science"
+        },
+        "instructions": {
+          "type": "string",
+          "description": "Detailed homework instructions in English or Tamil"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "Due date in YYYY-MM-DD format"
+        },
+        "assignedStudentIds": {
+          "type": "array",
+          "description": "List of student IDs assigned to this homework"
+        },
+        "attachmentUrl": {
+          "type": "string",
+          "description": "Optional image or worksheet URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of creation"
+        }
+      },
+      "required": ["id", "title", "subject", "instructions", "dueDate", "assignedStudentIds"]
+    },
+    "submission": {
+      "title": "submission",
+      "description": "Submission created by student and reviewed by teacher",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the submission"
+        },
+        "homeworkId": {
+          "type": "string",
+          "description": "Reference to the homework ID"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Reference to the student ID"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Student display name"
+        },
+        "answer": {
+          "type": "string",
+          "description": "Student's written answers in Tamil or English"
+        },
+        "attachmentUrl": {
+          "type": "string",
+          "description": "Optional student homework photo or scan"
+        },
+        "status": {
+          "type": "string",
+          "description": "pending, submitted, approved, or needs_correction"
+        },
+        "teacherFeedback": {
+          "type": "string",
+          "description": "Feedback or remarks from the teacher"
+        },
+        "submittedAt": {
+          "type": "string",
+          "description": "ISO timestamp when submitted"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp when updated"
+        }
+      },
+      "required": ["id", "homeworkId", "studentId", "status"]
+    }
+  },
+  "firestore": {
+    "/students/{studentId}": {
+      "schema": "student",
+      "description": "Student roster with access codes"
+    },
+    "/homeworks/{homeworkId}": {
+      "schema": "homework",
+      "description": "Homework assignments created by teacher"
+    },
+    "/submissions/{submissionId}": {
+      "schema": "submission",
+      "description": "Homework submissions from students with feedback"
+    }
+  }
+}
